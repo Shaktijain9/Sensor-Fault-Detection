@@ -2,8 +2,10 @@ import pymongo
 import pandas as pd
 import json
 
+MONGO_DB_CONNECTION = "mongodb+srv://m001-student:tGxrhF35TSNT87dr@sandbox.b27ar.mongodb.net/?retryWrites=true&w=majority"
+
 client = pymongo.MongoClient(
-    "mongodb+srv://m001-student:tGxrhF35TSNT87dr@sandbox.b27ar.mongodb.net/?retryWrites=true&w=majority")
+    MONGO_DB_CONNECTION)
 
 
 DATA_FILE_PATH = "aps_failure_training_set1.csv"

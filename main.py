@@ -1,5 +1,6 @@
 from sensor.logger import logging
 from sensor.exception import SensorException
+from sensor.utils import get_collection_as_dataframe
 import sys, os
 
 
@@ -17,6 +18,6 @@ def test_logger_exception():
 
 if __name__ == "__main__":
     try:
-        test_logger_exception()
+        get_collection_as_dataframe("APS", "Sensor")
     except Exception as e:
         print(e)
