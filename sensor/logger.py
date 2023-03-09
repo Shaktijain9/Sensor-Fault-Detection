@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 # Log Filename
-LOG_FILE_NAME = f"{datetime.now().strftime('%m%d%Y__%H%M__%S')}".log
+LOG_FILE_NAME = f"{datetime.now().strftime('%m%d%Y__%H%M__%S')}.log"
 
 # Log Directory
 LOG_FILE_DIR = os.path.join(os.getcwd(), "logs")
