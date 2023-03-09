@@ -1,6 +1,8 @@
 class DataIngestionArtifact: ...
 
 
+
+
 class DataValidationArtifact: ...
 
 
