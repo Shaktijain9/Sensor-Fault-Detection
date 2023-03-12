@@ -1,17 +1,15 @@
-import os
 import sys
 from typing import Optional
 
 import numpy as np
 import pandas as pd
-import yaml
 from scipy.stats import ks_2samp
 
+from sensor import utils
 from sensor.entity import artifact_entity
 from sensor.entity import config_entity
 from sensor.exception import SensorException
 from sensor.logger import logging
-from sensor import utils
 
 
 class DataValidation:

@@ -1,9 +1,7 @@
-import pandas as pd
-import numpy as np
-import pymongo
-import json
 import os
 from dataclasses import dataclass
+
+import pymongo
 from dotenv import load_dotenv
 
 
