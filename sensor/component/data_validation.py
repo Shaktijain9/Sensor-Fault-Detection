@@ -10,6 +10,7 @@ from sensor.entity import artifact_entity
 from sensor.entity import config_entity
 from sensor.exception import SensorException
 from sensor.logger import logging
+from sensor.config import TARGET_COLUMN
 
 
 class DataValidation:
@@ -126,7 +127,7 @@ class DataValidation:
             train_df = self.drop_column(df=train_df, report_key_name='missing_values_within_train_dataset')
             test_df = self.drop_column(df=test_df, report_key_name='missing_values_within_test_dataset')
 
-            exclude_columns = ['class']
+            exclude_columns = [TARGET_COLUMN]
             base_df = utils.convert_columns_float(base_df, exclude_columns=exclude_columns)
             train_df = utils.convert_columns_float(train_df, exclude_columns=exclude_columns)
             test_df = utils.convert_columns_float(test_df, exclude_columns=exclude_columns)
