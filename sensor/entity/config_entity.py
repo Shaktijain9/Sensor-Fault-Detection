@@ -54,7 +54,8 @@ class DataTransformationConfig:
                                                           TARGET_ENCODER_OBJECT_FILE_NAME)
 
 
-class ModelTrainerConfig: ...
+class ModelTrainerConfig:
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):...
 
 
 class ModelEvaluationConfig: ...
