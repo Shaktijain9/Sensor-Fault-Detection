@@ -55,7 +55,12 @@ class DataTransformationConfig:
 
 
 class ModelTrainerConfig:
-    def __init__(self, training_pipeline_config:TrainingPipelineConfig):...
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
+        self.model_trainer_dir = os.path.join(training_pipeline_config.artifact_dir)
+        self.model_path = os.path.join(self.model_trainer_dir, "model", MODEL_FILE_NAME)
+        self.expected_score = 0.7
+        self.overfitting_threshold = 0.1
+
 
 
 class ModelEvaluationConfig: ...

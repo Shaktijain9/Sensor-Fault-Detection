@@ -68,23 +68,23 @@ class DataTransformation:
             input_feature_test_arr = transformation_pipeline.transform(input_feature_test_df)
 
             smt = SMOTETomek(sampling_strategy='minority')
-            logging.info(f'Before resampling input train size:{input_feature_train_arr.size()},'
-                         f' target size:{target_feature_train_arr.size()}')
+            logging.info(f'Before resampling input train size:{input_feature_train_arr.shape},'
+                         f' target size:{target_feature_train_arr.shape}')
 
-            logging.info(f'Before resampling input test size:{input_feature_test_arr.size()},'
-                         f' target size:{target_feature_test_arr.size()}')
+            logging.info(f'Before resampling input test size:{input_feature_test_arr.shape},'
+                         f' target size:{target_feature_test_arr.shape}')
 
             input_feature_train_arr, target_feature_train_arr = smt.fit_resample(input_feature_train_arr,
                                                                                  target_feature_train_arr)
 
-            logging.info(f'After resampling input size:{input_feature_train_arr.size()},'
-                         f' target size:{target_feature_train_arr.size()}')
+            logging.info(f'After resampling input size:{input_feature_train_arr.shape},'
+                         f' target size:{target_feature_train_arr.shape}')
 
             input_feature_test_arr, target_feature_test_arr = smt.fit_resample(input_feature_test_arr,
                                                                                target_feature_test_arr)
 
-            logging.info(f'After resampling input test size:{input_feature_test_arr.size()},'
-                         f' target size:{target_feature_test_arr.size()}')
+            logging.info(f'After resampling input test size:{input_feature_test_arr.shape},'
+                         f' target size:{target_feature_test_arr.shape}')
 
             # Target Encoder
             train_arr = np.c_[input_feature_train_arr, target_feature_train_arr]
@@ -97,7 +97,7 @@ class DataTransformation:
                                         array=test_arr)
 
             # Save transformation objects
-            utils.save_object(file_path=self.data_transformation_config.transformation_object_path,
+            utils.save_object(file_path=self.data_transformation_config.transformed_object_path,
                               obj=transformation_pipeline)
             utils.save_object(file_path=self.data_transformation_config.target_encoder_path,
                               obj=label_encoder)
