@@ -38,9 +38,9 @@ class ModelEvaluation:
                 logging.info(f"Returning Model Evaluation Artifact: {model_eval_artifact}")
                 return model_eval_artifact
 
-            # Finding location of transformer model & target encoder
+            # Finding location of transformer model & target encoder.
             transformer_path = self.model_resolver.get_latest_transformer_path()
-            model_path = self.model_resolver.get_latest_save_model_path()
+            model_path = self.model_resolver.get_latest_model_path()
             target_encoder_path = self.model_resolver.get_latest_encoder_path()
 
             # Loading Previously trained model objects
@@ -60,7 +60,8 @@ class ModelEvaluation:
             y_true = target_encoder.transform(target_df)
 
             # Accuracy using previously trained model
-            input_arr = transformer.transform(test_df)
+            input_feature_name = list(transformer.feature_names_in_)
+            input_arr = transformer.transform(test_df[input_feature_name])
             y_pred = model.predict(input_arr)
             print(f"Prediction using previous model: {target_encoder.inverse_transform(y_pred[:5])}")
 
@@ -68,14 +69,15 @@ class ModelEvaluation:
             logging.info(f"Previous Model Score:{previous_model_score}")
 
             # Accuracy using current model
-            input_arr_curr = current_transformers.transform(test_df)
+            input_feature_name = list(current_transformers.feature_names_in_)
+            input_arr_curr = current_transformers.transform(test_df[input_feature_name])
             y_pred_curr = current_model.predict(input_arr_curr)
             print(f"Prediction using current model: {current_target_encoder.inverse_transform(y_pred_curr[:5])}")
 
             current_model_score = f1_score(y_true, y_pred_curr)
             logging.info(f"Current Model Score:{current_model_score}")
 
-            if current_model_score < previous_model_score:
+            if current_model_score <= previous_model_score:
                 raise Exception("Current trained model is not better than previous model.")
             accuracy_diff = current_model_score - previous_model_score
             model_eval_artifact = artifact_entity.ModelEvaluationArtifact(is_model_accepted=True,

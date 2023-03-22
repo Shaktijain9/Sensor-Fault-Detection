@@ -13,6 +13,7 @@ from sensor.logger import logging
 
 class DataIngestion:
     def __init__(self, data_ingestion_config: config_entity.DataIngestionConfig):
+        logging.info("-------Data Ingestion -------")
         try:
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:

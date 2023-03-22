@@ -16,6 +16,7 @@ from sensor.config import TARGET_COLUMN
 class DataValidation:
     def __init__(self, data_validation_config: config_entity.DataValidationConfig,
                  data_ingestion_artifact: artifact_entity.DataIngestionArtifact):
+        logging.info("-------Data Validation -------")
         try:
             logging.info(f'Data Validation')
             self.data_validation_config = data_validation_config
