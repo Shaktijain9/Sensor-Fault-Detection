@@ -1,4 +1,3 @@
-
 from sensor.logger import logging
 from sensor.exception import SensorException
 from sensor.utils import get_collection_as_dataframe
@@ -8,14 +7,13 @@ from sensor.entity.config_entity import DataIngestionConfig
 from sensor.entity.config_entity import DataValidationConfig
 from sensor.entity.config_entity import DataTransformationConfig
 from sensor.entity.config_entity import ModelTrainerConfig
+from sensor.entity.config_entity import ModelEvaluationConfig
 
 from sensor.component import data_ingestion
 from sensor.component import data_validation
 from sensor.component import data_transformation
 from sensor.component import model_trainer
-
-
-
+from sensor.component import model_evaluation
 
 if __name__ == "__main__":
     try:
@@ -36,17 +34,25 @@ if __name__ == "__main__":
         # data transformation
         data_transformation_config = DataTransformationConfig(
             training_pipeline_config=training_pipeline_config)
-        data_transformation = data_transformation.DataTransformation(data_transformation_config=data_transformation_config,
-                                                 data_ingestion_artifact=data_ingestion_artifact)
+        data_transformation = data_transformation.DataTransformation(
+            data_transformation_config=data_transformation_config,
+            data_ingestion_artifact=data_ingestion_artifact)
         data_transformation_artifact = data_transformation.initiate_data_transformation()
 
         # model trainer
         model_trainer_config = ModelTrainerConfig(training_pipeline_config=training_pipeline_config)
         model_trainer = model_trainer.ModelTrainer(model_trainer_config=model_trainer_config,
-                                     data_transformation_artifact=data_transformation_artifact)
+                                                   data_transformation_artifact=data_transformation_artifact)
         model_trainer_artifact = model_trainer.initiate_model_trainer()
 
+        # model evaluation
+        model_eval_config = ModelEvaluationConfig(training_pipeline_config=training_pipeline_config)
+        model_eval = model_evaluation.ModelEvaluation(model_eval_config=model_eval_config,
+                                                      data_ingestion_artifact=data_ingestion_artifact,
+                                                      data_transformation_artifact=data_transformation_artifact,
+                                                      model_trainer_artifact=model_trainer_artifact)
+        model_eval_artifact = model_eval.initiate_model_evaluation()
 
 
     except Exception as e:
-            print(e)
+        print(e)

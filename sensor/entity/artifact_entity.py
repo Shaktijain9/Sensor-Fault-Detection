@@ -21,14 +21,17 @@ class DataTransformationArtifact:
     target_encoder_path: str
 
 
-@dataclass()
+@dataclass
 class ModelTrainerArtifact:
     model_path: str
     f1_train_score: str
     f1_test_score: str
 
 
-class ModelEvaluationArtifact: ...
+@dataclass
+class ModelEvaluationArtifact:
+    is_model_accepted: bool
+    improved_accuracy: float
 
 
 class ModelPusherArtifact: ...
