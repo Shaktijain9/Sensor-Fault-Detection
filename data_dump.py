@@ -1,11 +1,14 @@
 import pymongo
 import pandas as pd
 import json
+from dotenv import load_dotenv
+from sensor.config import mongo_client
 
-MONGO_DB_CONNECTION = "mongodb+srv://m001-student:tGxrhF35TSNT87dr@sandbox.b27ar.mongodb.net/?retryWrites=true&w=majority"
 
+print('Loading Environment variable from .env file.')
+load_dotenv()
 client = pymongo.MongoClient(
-    MONGO_DB_CONNECTION)
+    mongo_client)
 
 
 DATA_FILE_PATH = "aps_failure_training_set1.csv"

@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 @dataclass
 class EnvironmentVariables:
     load_dotenv()
-    mongo_db_url: str = os.getenv("MONGO_DB_CONNECTION")
+    mongo_db_url: str = os.getenv("MONGO_DB_URL")
 
 
 env_var = EnvironmentVariables()
