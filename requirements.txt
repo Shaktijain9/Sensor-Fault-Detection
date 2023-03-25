@@ -1,4 +1,4 @@
-setuptools~=60.10.0
+setuptools==67.6.0
 pymongo~=4.3.3
 pandas=1.4.4
 sensor~=0.0.1
@@ -12,5 +12,6 @@ pandas==1.5.3
 dill==0.3.6
 imblearn==0.0
 xgboost==1.7.1
+pendulum==2.1.2
 
 -e .
