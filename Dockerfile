@@ -1,6 +1,6 @@
 FROM python:3.9
 USER root
-RUN mkdir/app
+RUN mkdir /app
 COPY . /app/
 WORKDIR /app/
 RUN pip3 install -r requirements.txt
